@@ -1,14 +1,10 @@
-import './App.css'
+import { Button } from "@/components/ui/button"
 
 function App() {
   return (
-    <>
-      <div>
-        <p>
-          Click on the Vite and React logos to learn more
-        </p>
-      </div>
-    </>
+    <div className="flex flex-col items-center justify-center min-h-svh">
+      <Button>Click Me</Button>
+    </div>
   )
 }
 
