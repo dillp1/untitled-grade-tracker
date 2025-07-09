@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 
-function RegisterClassForm() {
+function RegisterClassForm({ onRegister }) {
   const [name, setName] = useState("");
   const [code, setCode] = useState("");
   const [credits, setCredits] = useState("");
@@ -24,6 +24,8 @@ function RegisterClassForm() {
       code,
       credits: Number(credits),
     }
+
+    onRegister(newClass);
 
     console.log("New class registered:", newClass);
     // TODO: pass this as a parent via props
