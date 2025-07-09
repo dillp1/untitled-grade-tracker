@@ -2,13 +2,6 @@ import React, { useState } from "react"
 import RegisterClassForm from "./components/RegisterClassForm"
 import CourseCard from "./components/CoruseCard"
 
-const mockCourse ={
-  id: "1",
-  name: "Math",
-  code: "MATH101",
-  credits: 3
-}
-
 function App() {
   const [courses, setCourses] = useState([])
 
