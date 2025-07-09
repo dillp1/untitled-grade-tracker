@@ -38,9 +38,9 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-svh gap-4">
+    <div className="flex flex-col flex-wrap items-center justify-center min-h-svh gap-8 p-4">
       <RegisterClassForm onRegister={handleRegisterCourse} />
-      <div className="flex flex-col items-center gap-4 w-full">
+      <div className="flex flex-wrap items-center justify-center gap-4 w-full">
         {courses.map((course) => (
           <CourseCard
             key={course.id}
