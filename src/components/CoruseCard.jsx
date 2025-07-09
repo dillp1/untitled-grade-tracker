@@ -56,6 +56,7 @@ function CourseCard({ course, onDelete, onAddAssignment }) {
         </div>
       )}
 
+      {/* Add Assignment Dialog */}
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button variant="outline">Add Assignment</Button>
@@ -77,6 +78,8 @@ function CourseCard({ course, onDelete, onAddAssignment }) {
           <Button type="submit" onClick={handleAssignmentSubmit}>Save</Button>
         </DialogContent>
       </Dialog>
+
+      {/* Delete Course Button */}
       <Button 
         variant="destructive"
         onClick={() => onDelete(course.id)}
