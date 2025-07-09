@@ -16,22 +16,38 @@ function App() {
   }, [courses])
 
   // Function to handle course registration
-  function handleRegister(newCourse) {
+  function handleRegisterCourse(newCourse) {
     setCourses((prevCourses) => [...prevCourses, newCourse])
     console.log("Registered course:", newCourse)
   }
 
   // Function to handle course deletion
-  function handleDelete(courseID) {
+  function handleDeleteCourse(courseID) {
     setCourses(prev => prev.filter(course => course.id !== courseID));
+  }
+
+  // Function to handle adding an assignment to a course
+  function handleAddAssignment(courseID, newAssignment) {
+    setCourses(prevCourses =>
+      prevCourses.map(course =>
+        course.id === courseID
+          ? { ...course, assignments: [...(course.assignments || []), newAssignment] }
+          : course
+      )
+    );
   }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-svh gap-4">
-      <RegisterClassForm onRegister={handleRegister} />
+      <RegisterClassForm onRegister={handleRegisterCourse} />
       <div className="flex flex-col items-center gap-4 w-full">
         {courses.map((course) => (
-          <CourseCard key={course.id} course={course} onDelete={handleDelete} />
+          <CourseCard
+            key={course.id}
+            course={course}
+            onDelete={handleDeleteCourse}
+            onAddAssignment={handleAddAssignment}
+          />
         ))}
       </div>
     </div>

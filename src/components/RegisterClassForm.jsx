@@ -18,16 +18,17 @@ function RegisterClassForm({ onRegister }) {
       return;
     }
 
-    const newClass ={
+    const newCourse = {
       id: crypto.randomUUID(),
       name,
       code,
       credits: Number(credits),
+      assignments: []
     }
 
-    onRegister(newClass);
+    onRegister(newCourse);
 
-    console.log("New class registered:", newClass);
+    console.log("New class registered:", newCourse);
     // TODO: pass this as a parent via props
 
     // Reset form fields
