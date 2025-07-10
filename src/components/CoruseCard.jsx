@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Input } from "@/components/ui/input"
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -8,7 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog";
 
 function CourseCard({ course, onDelete, onAddAssignment }) {
   const [title, setTitle] = useState("");
@@ -70,23 +70,25 @@ function CourseCard({ course, onDelete, onAddAssignment }) {
               <DialogTitle>New Assignment</DialogTitle>
             </DialogHeader>
 
-            {/* Form */ }
-            <form onSubmit={handleAssignmentSubmit} className="flex flex-col gap-2">
+            {/* Form */}
+            <form
+              onSubmit={handleAssignmentSubmit}
+              className="flex flex-col gap-2"
+            >
               <Input
                 placeholder="Assignment Name"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
             </form>
-            <Button type="submit" onClick={handleAssignmentSubmit}>Save</Button>
+            <Button type="submit" onClick={handleAssignmentSubmit}>
+              Save
+            </Button>
           </DialogContent>
         </Dialog>
 
         {/* Delete Course Button */}
-        <Button 
-          variant="destructive"
-          onClick={() => onDelete(course.id)}
-        >
+        <Button variant="destructive" onClick={() => onDelete(course.id)}>
           Delete
         </Button>
       </div>
