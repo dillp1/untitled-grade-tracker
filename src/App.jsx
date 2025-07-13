@@ -1,5 +1,5 @@
 import RegisterClassForm from "./components/RegisterClassForm";
-import CourseCard from "./components/CoruseCard";
+import CourseList from "./components/CourseList";
 import { Button } from "@/components/ui/button";
 
 import { useCourses } from "./components/utils/useCourses";
@@ -39,16 +39,11 @@ function App() {
       </div>
       <div className="flex flex-col flex-wrap items-center justify-center gap-8 p-4">
         <RegisterClassForm onRegister={handleRegisterCourse} />
-        <div className="flex flex-wrap items-center justify-center gap-4 w-full">
-          {courses.map((course) => (
-            <CourseCard
-              key={course.id}
-              course={course}
-              onDelete={handleDeleteCourse}
-              onAddAssignment={handleAddAssignment}
-            />
-          ))}
-        </div>
+        <CourseList
+          courses={courses}
+          onDelete={handleDeleteCourse}
+          onAddAssignment={handleAddAssignment}
+        />
       </div>
     </div>
   );
