@@ -19,6 +19,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
+import AssignmentList from "./AssignmentList";
+
 function CourseCard({ course, onDelete, onAddAssignment }) {
   const [title, setTitle] = useState("");
   const [dueDate, setDueDate] = useState(null);
@@ -57,24 +59,7 @@ function CourseCard({ course, onDelete, onAddAssignment }) {
         <p className="text-sm">Credits: {course.credits}</p>
       </div>
 
-      {/* Assignments list */}
-      {course.assignments && course.assignments.length > 0 && (
-        <div className="w-full mt-2">
-          <p className="text-sm font-medium mb-1">Assignments:</p>
-          <ul className="list-disc list-inside space-y-1">
-            {course.assignments.map((a) => (
-              <li key={a.id} className="text-sm text-gray-700">
-                <div>{a.title}</div>
-                {a.dueDate && (
-                  <div className="text-sx text-muted-foreground">
-                    Due: {format(new Date(a.dueDate), "PPP")}
-                  </div>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <AssignmentList assignments={course.assignments} />
 
       <div className="flex flex-row items-center gap-2 mt-4 w-full">
         {/* Add Assignment Dialog */}
