@@ -2,34 +2,26 @@ import RegisterClassForm from "./components/RegisterClassForm";
 import CourseCard from "./components/CoruseCard";
 import { Button } from "@/components/ui/button";
 
-import { useCourses } from "./components/useCourses";
+import { useCourses } from "./components/utils/useCourses";
+import {
+  registerCourse,
+  deleteCourse,
+  addAssignment,
+} from "./components/utils/courseHelpers";
 
 function App() {
   const [courses, setCourses] = useCourses();
 
-  // Function to handle course registration
   function handleRegisterCourse(newCourse) {
-    setCourses((prevCourses) => [...prevCourses, newCourse]);
-    console.log("Registered course:", newCourse);
+    setCourses((prev) => registerCourse(prev, newCourse));
   }
 
-  // Function to handle course deletion
   function handleDeleteCourse(courseID) {
-    setCourses((prev) => prev.filter((course) => course.id !== courseID));
+    setCourses((prev) => deleteCourse(prev, courseID));
   }
 
-  // Function to handle adding an assignment to a course
   function handleAddAssignment(courseID, newAssignment) {
-    setCourses((prevCourses) =>
-      prevCourses.map((course) =>
-        course.id === courseID
-          ? {
-              ...course,
-              assignments: [...(course.assignments || []), newAssignment],
-            }
-          : course
-      )
-    );
+    setCourses((prev) => addAssignment(prev, courseID, newAssignment));
   }
 
   // Function to clear localStorage
