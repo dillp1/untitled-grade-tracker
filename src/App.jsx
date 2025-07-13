@@ -1,19 +1,11 @@
-import React, { useState, useEffect } from "react";
 import RegisterClassForm from "./components/RegisterClassForm";
 import CourseCard from "./components/CoruseCard";
 import { Button } from "@/components/ui/button";
 
-function App() {
-  // Check localStorage for existing courses
-  const [courses, setCourses] = useState(() => {
-    const stored = localStorage.getItem("courses");
-    return stored ? JSON.parse(stored) : [];
-  });
+import { useCourses } from "./components/useCourses";
 
-  // Save courses to localStorage whenever they change
-  useEffect(() => {
-    localStorage.setItem("courses", JSON.stringify(courses));
-  }, [courses]);
+function App() {
+  const [courses, setCourses] = useCourses();
 
   // Function to handle course registration
   function handleRegisterCourse(newCourse) {
