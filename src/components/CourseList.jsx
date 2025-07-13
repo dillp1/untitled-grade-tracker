@@ -1,3 +1,5 @@
+import CourseCard from "./CourseCard";
+
 export default function CourseList({ courses, onDelete, onAddAssignment }) {
   return (
     <div className="flex flex-wrap items-center justify-center gap-4 w-full">
