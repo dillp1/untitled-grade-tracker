@@ -13,6 +13,7 @@ function CourseCard({ course, onDelete, onAddAssignment }) {
         <p className="text-sm">Credits: {course.credits}</p>
       </div>
 
+      {/* Assignments List */}
       <AssignmentList assignments={course.assignments} />
 
       <div className="flex flex-row items-center gap-2 mt-4 w-full">
