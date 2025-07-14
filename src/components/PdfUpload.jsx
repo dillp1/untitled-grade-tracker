@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 export default function PdfUpload() {
   const fileInputRef = useRef(null);
   const [selectedFileName, setSelectedFileName] = useState("");
-  const [extractedText, setExtractedText] = useState("");
+  const [extractedInfo, setExtractedInfo] = useState(null);
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
@@ -36,12 +36,15 @@ export default function PdfUpload() {
       );
 
       const data = await response.json();
-      setExtractedText(data.text || "No text extracted.");
+      console.log("Extracted info from backend:", data);
+      setExtractedInfo(data);
     } catch (err) {
       console.error("Upload failed", err);
-      setExtractedText("Failed to extract text from PDF.");
+      setExtractedInfo(null);
     }
   };
+
+  console.log("Rendering extractedInfo:", extractedInfo);
 
   return (
     <div className="flex flex-col items-center space-y-2">
@@ -64,10 +67,15 @@ export default function PdfUpload() {
           Selected: {selectedFileName}
         </p>
       )}
-      {extractedText && (
+      {extractedInfo && typeof extractedInfo === "object" && (
         <div className="mt-4 p-4 border rounded-md bg-muted text-sm whitespace-pre-wrap">
-          <strong>Extracted Text:</strong>
-          <p>{extractedText}</p>
+          <strong>Extracted Course Information:</strong>
+          <p>
+            <strong>Class code:</strong> {extractedInfo?.course_code || "N/A"}
+          </p>
+          <p>
+            <strong>Class name:</strong> {extractedInfo?.course_name || "N/A"}
+          </p>
         </div>
       )}
     </div>
