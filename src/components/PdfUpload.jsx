@@ -68,13 +68,13 @@ export default function PdfUpload() {
         </p>
       )}
       {extractedInfo && typeof extractedInfo === "object" && (
-        <div className="mt-4 p-4 border rounded-md bg-muted text-sm whitespace-pre-wrap">
+        <div className="mt-4 p-4 gap-4 border rounded-md bg-muted text-sm whitespace-pre-wrap">
           <strong>Extracted Course Information:</strong>
           <p>
-            <strong>Class code:</strong> {extractedInfo?.course_code || "N/A"}
+            <strong>Course name:</strong> {extractedInfo?.course_name || "N/A"}
           </p>
           <p>
-            <strong>Class name:</strong> {extractedInfo?.course_name || "N/A"}
+            <strong>Course code:</strong> {extractedInfo?.course_code || "N/A"}
           </p>
         </div>
       )}
