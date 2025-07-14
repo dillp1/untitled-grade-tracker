@@ -5,15 +5,41 @@ import { Input } from "@/components/ui/input";
 export default function PdfUpload() {
   const fileInputRef = useRef(null);
   const [selectedFileName, setSelectedFileName] = useState("");
+  const [extractedText, setExtractedText] = useState("");
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
 
   const handleFileChange = (event) => {
+    event.preventDefault();
+
     const file = event.target.files[0];
     if (file) {
       setSelectedFileName(file.name);
+    }
+  };
+
+  const handleUpload = async () => {
+    if (!fileInputRef.current.files[0]) return;
+
+    const formData = new FormData();
+    formData.append("pdf", fileInputRef.current.files[0]);
+
+    try {
+      const response = await fetch(
+        "http://localhost:3001/api/extract-course-info",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const data = await response.json();
+      setExtractedText(data.text || "No text extracted.");
+    } catch (err) {
+      console.error("Upload failed", err);
+      setExtractedText("Failed to extract text from PDF.");
     }
   };
 
@@ -27,11 +53,22 @@ export default function PdfUpload() {
         onChange={handleFileChange}
         className="hidden"
       />
-      <Button onClick={handleButtonClick}>Select PDF</Button>
+      <Button type="button" onClick={handleButtonClick}>
+        Select PDF
+      </Button>
+      <Button type="button" onClick={handleUpload} disabled={!selectedFileName}>
+        Upload PDF
+      </Button>
       {selectedFileName && (
         <p className="text-sm text-muted-foreground">
           Selected: {selectedFileName}
         </p>
+      )}
+      {extractedText && (
+        <div className="mt-4 p-4 border rounded-md bg-muted text-sm whitespace-pre-wrap">
+          <strong>Extracted Text:</strong>
+          <p>{extractedText}</p>
+        </div>
       )}
     </div>
   );
