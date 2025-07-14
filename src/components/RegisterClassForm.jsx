@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import PdfUpload from "./PdfUpload";
 
 function RegisterClassForm({ onRegister }) {
   const [name, setName] = useState("");
@@ -65,6 +66,12 @@ function RegisterClassForm({ onRegister }) {
     <form onSubmit={handleSubmit}>
       <div className="flex flex-col items-center justify-center p-4 gap-4 border rounded-md shadow-md">
         <p>Register a new course</p>
+
+        {/* Upload PDF button */}
+        <PdfUpload />
+
+        <p>OR enter course details manually:</p>
+
         <Input
           placeholder="Course Name"
           value={name}
